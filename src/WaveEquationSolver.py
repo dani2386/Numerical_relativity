@@ -38,13 +38,13 @@ class WaveEquationSolver:
                                       + self.courant_param ** 2 * self.second_centered_spatial_derivative(n))
 
     def solution_n(self, n):
-        return self.grid[n]
+        return self.grid[n, :]
 
     def solution_m(self, m):
-        return self.grid[m]
+        return self.grid[:, m]
 
     def solution_mn(self, n, m):
-        return self.grid[n][m]
+        return self.grid[n, m]
 
     def draw_n(self, n):
         plt.plot(self.spatial_domain(), self.solution_n(n))
