@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.animation as animation
 
 
 class WaveEquationSolver:
@@ -54,3 +55,16 @@ class WaveEquationSolver:
     def draw_m(self, m):
         plt.plot(self.time_domain(), self.solution_m(m))
         plt.show()
+
+    def animate(self):
+        fig, ax = plt.subplots()
+        ax.set_ylim(1.2 * -np.max(self.grid), 1.2 * np.max(self.grid))
+        line, = ax.plot(self.spatial_domain(), self.solution_n(0))
+
+        def update(frame):
+            line.set_ydata(self.solution_n(frame))
+            return line,
+
+        anim = animation.FuncAnimation(fig, update, frames=self.N, blit=True)
+        writer = animation.FFMpegWriter(fps=15, metadata=dict(artist='Me'), bitrate=1800)
+        anim.save("animation.mp4", writer=writer)

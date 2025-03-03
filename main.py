@@ -21,3 +21,4 @@ wave_equation_solver.solve_explicit(f, g)
 
 wave_equation_solver.draw_n(0)
 wave_equation_solver.draw_n(n)
+wave_equation_solver.animate()
